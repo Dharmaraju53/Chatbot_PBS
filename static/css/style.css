@@ -1,34 +1,15 @@
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  background-image: url('/static/img/gif2.gif'); /* Update with your GIF path */
+    background-size: cover;  /* Ensures the GIF covers the entire screen */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 170vh;
   overflow: hidden; /* Prevent scrolling */
-  background-image: url('/static/img/chatbot_background.gif');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed; /* Keeps the background in place while scrolling */
-  width: 100%;
-  height: 100%;
-  margin: 0;
-    padding: 0;
 }
 
-
-@media (max-width: 768px) {
-  body {
-      background-size: cover;
-      background-position: center;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  body {
-      background-size: cover;
-      background-position: center;
-  }
-}
-
-/* #background-video {
+#background-video {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -36,47 +17,69 @@ body {
   min-height: 100%;
   width: auto;
   height: auto;
-  z-index: -1; 
+  z-index: -1; /* Ensure the video stays behind the content */
   background: no-repeat;
   background-size: cover;
   overflow: hidden;
-} */
+}
 
 
 
 /* ============= css related to chats =============== */
 
+/* Updated Chatbot Container */
 .widget {
   display: none;
-  width: 350px;
-  right: 15px;
-  height: 500px;
+  width: 500px; /* Increased initial width */
+  right: 20px;
+  height: 500px; /* Increased height */
   bottom: 5%;
   position: fixed;
   background: #fff;
-  border-radius: 10px 10px 10px 10px;
-  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.16), 0 0px 5px 0 #00000096;
+  border-radius: 12px;
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2), 0 0px 6px 0 #00000096;
+  transition: width 0.3s ease; /* Smooth width transition */
 }
 
+/* Expanded Chatbot Container */
+.widget.expanded {
+  width: 650px; /* Expanded width */
+}
+
+/* Header */
 .chat_header {
-  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
   background: #060dcfc7;
-  border-radius: 10px 10px 0px 0px;
-  padding: 5px;
-  font-size: 20px;
+  border-radius: 12px 12px 0 0;
+  padding: 10px 20px; /* Adds more padding */
+  font-size: 22px; /* Larger font size */
+}
+
+.back_arrow {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2em; /* Larger icon */
+  /* margin-right: auto; */
 }
 
 .chat_header_title {
   color: white;
-  float: left;
-  margin-top: 3%;
-  margin-left: 35%;
+  font-size: 24px; /* Increased title font size */
+  text-align: center;
 }
 
+.dropdown-trigger {
+  color: white;
+  font-size: 1.8em; /* Larger dropdown icon */
+}
+
+/* Chats Container */
 .chats {
-  /* display: none; */
-  height: 385px;
-  padding: 2px;
+  height: 550px; /* Increased height for larger container */
+  padding: 5px;
   border-radius: 1px;
   overflow-y: scroll;
   margin-top: 1px;
@@ -84,165 +87,102 @@ body {
 }
 
 div.chats::-webkit-scrollbar {
-  overflow-y: hidden;
-  width: 0px;
-  /* remove scrollbar space /
-    background: transparent;
-    / optional: just make scrollbar invisible */
+  width: 5px; /* Adjusted scrollbar width */
+  background: transparent;
 }
 
-.clearfix {
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
-
-.botAvatar {
-  border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
-  float: left;
-  margin-left: 5px;
-  /* border: 2px solid  #060DCF ; */
-}
-
+/* Bot Message Styling */
 .botMsg {
   float: left;
-  margin-top: 5px;
+  margin-top: 10px;
   background: #e3e7ee;
   color: black;
-  /* box-shadow: 2px 3px 9px 0px #9a82842e; */
-  margin-left: 0.5em;
-  padding: 10px;
-  border-radius: 1.5em;
-  max-width: 60%;
-  min-width: 25%;
-  font-size: 13px;
-  word-wrap: break-word;
-  border-radius: 5px 20px 20px 20px;
+  padding: 12px;
+  max-width: 75%; /* Increased width */
+  min-width: 35%; /* Increased minimum width */
+  font-size: 16px; /* Increased font size */
+  border-radius: 8px 24px 24px 24px;
+  transition: max-width 0.3s ease;
 }
 
-div.chats > pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
-  margin: 0 !important;
-  /* display: inline !important; */
-  white-space: initial !important;
-}
-div.chats > ul:not(.browser-default) {
-  padding-left: 1em;
-}
-div.chats > ul:not(.browser-default) > li {
-  list-style-type: initial;
-}
-
-div.chats > span.botMsg > ol {
-  padding-left: 1em;
-}
-textarea {
-  box-shadow: none;
-  resize: none;
-  outline: none;
-  overflow: hidden;
-  font-family: Lato;
-}
-
-textarea::-webkit-input-placeholder {
-  font-family: Lato;
-}
-
-textarea-webkit-scrollbar {
-  width: 0 !important;
-}
-
+/* User Message Styling */
 .userMsg {
-  animation: animateElement linear 0.2s;
-  animation-iteration-count: 1;
-  margin-top: 5px;
-  word-wrap: break-word;
-  padding: 10px;
   float: right;
-  margin-right: 0.5em;
+  margin-top: 10px;
   background: #060dcfc7;
   color: white;
-  margin-bottom: 0.15em;
-  font-size: 13px;
-  max-width: 65%;
-  min-width: 15%;
-  border-radius: 20px 5px 20px 20px;
-  /* box-shadow: 0px 2px 5px 0px #9a828454; */
+  font-size: 16px;
+  max-width: 75%;
+  min-width: 35%;
+  padding: 12px;
+  border-radius: 24px 8px 24px 24px;
+  transition: max-width 0.3s ease;
 }
 
-blockquote {
-  margin: 20px 0;
-  padding-left: 1.5rem;
-  border-left: 5px solid #ee6e73;
-  margin-block-start: 0 !important;
-  margin-block-end: 0 !important;
-  margin-inline-start: 0 !important;
-  margin-inline-end: 0 !important;
-}
-
-.userAvatar {
-  animation: animateElement linear 0.3s;
-  animation-iteration-count: 1;
-  border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
-  float: right;
-  margin-right: 5px;
-  /* border: 2px solid  #060DCF ; */
-}
-
-.usrInput {
-  padding: 0.5em;
-  width: 80%;
-  margin-left: 4%;
-  border: 0;
-  padding-left: 15px;
-  height: 40px;
-}
-
+/* Input Area */
 .keypad {
-  /* display: none;  */
   background: white;
-  height: 50px;
+  height: 60px;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
-  padding: 5px;
-  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+  border-radius: 0 0 12px 12px;
   border-top: 1px solid #e3e7ee;
 }
 
-#sendButton {
-  height: 20px;
-  width: 20px;
+/* Adjusted CSS for .usrInput and #sendButton */
+.usrInput {
+  padding: 0.6em;
+  width: calc(100% - 60px); /* Adjusted to fit larger container */
+  margin-left: 5%;
+  border: 0;
+  padding-left: 20px;
+  height: 45px;
+  font-size: 16px; /* Larger input font */
+}
+
+/* Ensures the expanded .widget keeps all items within bounds */
+.widget.expanded .usrInput {
+  width: calc(100% - 70px);
+}
+
+/* Bot Avatar */
+.botAvatar {
   border-radius: 50%;
-  display: inline-block;
+  width: 2em;
+  height: 2em;
+  float: left;
+  margin-left: 10px;
+}
+
+/* User Avatar */
+.userAvatar {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
   float: right;
-  margin-right: 30px;
-  text-align: center;
-  padding: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #060dcfc7;
+  margin-right: 10px;
 }
 
-.imgProfile {
-  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.16), 0 0px 10px 0 #00000096;
-  border-radius: 50px;
-  width: 60%;
-}
-
+/* Profile Button */
 .profile_div {
-  /* display: none; */
   position: fixed;
-  padding: 5px;
-  width: 10%;
+  padding: 8px;
+  width: 12%;
   bottom: 0;
   right: 0;
   cursor: pointer;
 }
+
+/* Profile Image */
+.imgProfile {
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2), 0 0px 12px 0 #00000096;
+  border-radius: 50px;
+  width: 70%; /* Increased profile image size */
+}
+
+
 
 /* css for dropdown menu of the bot */
 
